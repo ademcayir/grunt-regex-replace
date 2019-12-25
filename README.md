@@ -4,6 +4,9 @@
 
 Grunt plugin to search and replace text content of files based on regular expression patterns
 
+## Adem's Addition
+Adding srcFile property to this object for replace callback. See `replace property (substr | function)`
+
 ## Getting Started
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with:
 
@@ -149,7 +152,7 @@ A regular expression string or object defining the text content to be found.
 
 #### replace property (substr | function)
 A string / regular expression pattern or function to replace the text content.
-For the replace function, values that match the parenthesized substring matches are passed as arguments
+For the replace function, values that match the parenthesized substring matches are passed as arguments. As extension, this.srcFile keep the file found with given regex.
 ```js
 {
     search: new RegExp(/(\w+)\s(\w+)/),
@@ -157,6 +160,7 @@ For the replace function, values that match the parenthesized substring matches 
       // arg1 is the full string matched
       // arg2 is the first parenthesized substring match
       // argN is the Nth parenthesized substring match
+      // this.srcFile gives the file found this regex
     }
 }
 ```
