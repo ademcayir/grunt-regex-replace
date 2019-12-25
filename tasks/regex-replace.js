@@ -39,9 +39,9 @@ module.exports = function(grunt) {
             break;
           }
         }
-        substrArgs.push(srcFile);
-        console.log("substrArgs:"+JSON.stringify(substrArgs));
-        return substr.apply(substrArgs);
+        thiz = {};
+        thiz.srcFile = srcFile;
+        return substr.apply(thiz,substrArgs);
       }
     }); //note: substr can be a function
     index = typeof index === 'undefined' ? '' : index;
