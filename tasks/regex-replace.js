@@ -30,16 +30,18 @@ module.exports = function(grunt) {
       if (typeof substr === "string") {
         return substr;
       } else {
-        var args = [];
+        var substrArgs = [];
         for (var i=0; ;i++){
           if (arguments[""+i]) {
-            args.push(arguments[""+i]);
+            console.log("argument["+i+"]="+arguments[""+i]);
+            substrArgs.push(arguments[""+i]);
           } else {
             break;
           }
         }
-        args.push(srcFile);
-        return substr.apply(args);
+        substrArgs.push(srcFile);
+        console.log("substrArgs:"+JSON.stringify(substrArgs));
+        return substr.apply(substrArgs);
       }
     }); //note: substr can be a function
     index = typeof index === 'undefined' ? '' : index;
