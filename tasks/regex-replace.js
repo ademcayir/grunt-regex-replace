@@ -17,7 +17,7 @@ module.exports = function(grunt) {
   // HELPERS
   // ==========================================================================
 
- var regexReplace = function(src, regex, substr, options, index, actionName) {
+ var regexReplace = function(src, regex, substr, options, index, actionName, src) {
     //takes the src content and changes the content
     var regExp = null,
         updatedSrc;
@@ -26,7 +26,22 @@ module.exports = function(grunt) {
     } else {
       regExp = regex; //regex => RegExp object
     }
-    updatedSrc = String(src).replace(regExp, substr); //note: substr can be a function
+    updatedSrc = String(src).replace(regExp, function(){
+      if (typeof substr === "string") {
+        return substr;
+      } else {
+        var args = [];
+        for (var i=0; ;i++){
+          if (arguments[""+i]) {
+            args.push(arguments[""+i]);
+          } else {
+            break;
+          }
+        }
+        args.push(src);
+        return substr.apply(args);
+      }
+    }); //note: substr can be a function
     index = typeof index === 'undefined' ? '' : index;
     if (!actionName) {
       grunt.log.verbose.ok(index + 1 + ' action(s) completed.');
@@ -100,7 +115,7 @@ module.exports = function(grunt) {
             if (replaceType === 'string') {
               rplAction = template.process(rplAction);
             }
-            updatedContent = regexReplace( updatedContent, srchAction, rplAction , options, j, action.name);
+            updatedContent = regexReplace( updatedContent, srchAction, rplAction , options, j, action.name, src);
           }
         }
         if (updatedContent !== sourceContent) {
