@@ -17,7 +17,7 @@ module.exports = function(grunt) {
   // HELPERS
   // ==========================================================================
 
- var regexReplace = function(src, regex, substr, options, index, actionName, src) {
+ var regexReplace = function(src, regex, substr, options, index, actionName, srcFile) {
     //takes the src content and changes the content
     var regExp = null,
         updatedSrc;
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
             break;
           }
         }
-        args.push(src);
+        args.push(srcFile);
         return substr.apply(args);
       }
     }); //note: substr can be a function
