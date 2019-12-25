@@ -33,7 +33,6 @@ module.exports = function(grunt) {
         var substrArgs = [];
         for (var i=0; ;i++){
           if (arguments[""+i]) {
-            console.log("argument["+i+"]="+arguments[""+i]);
             substrArgs.push(arguments[""+i]);
           } else {
             break;
