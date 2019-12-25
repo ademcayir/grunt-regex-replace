@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             break;
           }
         }
-        thiz = {};
+        var thiz = {};
         thiz.srcFile = srcFile;
         return substr.apply(thiz,substrArgs);
       }
